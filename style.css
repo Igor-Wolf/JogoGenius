@@ -12,6 +12,7 @@ h1{
     color:white;
     padding-bottom: 10px ;
     margin-bottom: 0%;
+    font-size: 5rem;
     
 }
 
@@ -34,8 +35,8 @@ h1{
     border: 1px solid #FFFFFF;
     background-color: #ffffff;
     border-radius: 100%;
-    width: 700px;
-    height : 700px;
+    
+    
 
 
 }
@@ -81,21 +82,33 @@ h1{
 
     text-align: center;
     color: white;
-    font-size: 25px;
+    font-size: 5rem;
     margin-top: 10px;
+    
 }
 
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1000px) {
 
     .genius {
 
-        width: 300px;
-        height: 300px;
+        width: 85vw;
+        height: 85vw;
         
     }
 
 
+
+}
+
+@media only screen and (min-width: 1001px) {
+
+    .genius {
+
+        width: 700px;
+        height : 700px;
+        
+    }
 
 }
 

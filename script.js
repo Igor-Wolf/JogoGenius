@@ -20,6 +20,17 @@ const green = document.querySelector('.green');
 const yellow = document.querySelector('.yellow');
 
 
+function playsound(audioName) {
+
+    let audio = new Audio(`./sfx/${audioName}.mp3`);
+    //alert(audioName)
+    if (audioName === "erro") {
+        audio.volume = 0.2;
+    }
+    audio.play();
+
+}
+
 let shuffleOrder = () => {
 
     let colorOrder = Math.floor(Math.random() * 4);
@@ -28,14 +39,33 @@ let shuffleOrder = () => {
     clickedOrder = [];
 
     for (let i in order) {
-        let element = createColorElement(order[i]);
-        lightColor(element, Number(i) + 1);
+        let element = createColorElement(order[i]);      
+        
+        lightColor(element, Number(i) + 1, order[i]);
     }
 }
 
-let lightColor = (element, number) => {
+let lightColor = (element, number, order) => {
+
+
     number = number * 1000; // Multiplicando por 1000 para obter o tempo em milissegundos
     setTimeout(() => {
+        if (order == "0") {
+            playsound('simonSound1')
+            
+        }
+        else if (order == "1") {
+            playsound('simonSound2')
+            
+        }
+        else if (order == "2") {
+            playsound('simonSound3')
+            
+        }
+        else if (order == "3") {
+            playsound('simonSound4')
+            
+        }
         element.classList.add('selected');
         setTimeout(() => {
             element.classList.remove('selected');
@@ -64,6 +94,23 @@ let click = (color) => {
     clickedOrder[clickedOrder.length] = color;
     let element = createColorElement(color);
     element.classList.add('selected');
+    
+    if (color == "0") {
+        playsound('simonSound1')
+        
+    }
+    else if (color == "1") {
+        playsound('simonSound2')
+        
+    }
+    else if (color == "2") {
+        playsound('simonSound3')
+        
+    }
+    else if (color == "3") {
+        playsound('simonSound4')
+        
+    }
 
     setTimeout(() => {
         element.classList.remove('selected');
@@ -88,22 +135,23 @@ let createColorElement = (color) => {
 // funcao para proximo nível do jogo
 let nextLevel = () => {
     score++;
-    pontuacaoAtual.innerHTML = score -1;
+    pontuacaoAtual.innerHTML = score - 1;
     shuffleOrder();
 }
 
 // funcao para game over
 let lose = () => {
-    
-    if (parseInt(pontuacaoAtual.innerHTML) > parseInt(pontuacaoRecord.innerHTML)){
+
+    if (parseInt(pontuacaoAtual.innerHTML) > parseInt(pontuacaoRecord.innerHTML)) {
 
         pontuacaoRecord.innerHTML = pontuacaoAtual.innerHTML
-    } 
-       
-    alert(`Pontuação: ${score-1}\nVocê perdeu o jogo!\nClique em OK para iniciar um novo jogo`);
+    }
+    playsound("erro");
+    alert(`Pontuação: ${score - 1}\nVocê perdeu o jogo!\nClique em OK para iniciar um novo jogo`);
     order = [];
     clickedOrder = [];
     pontuacaoAtual.innerHTML = 0;
+
     playGame();
 }
 
